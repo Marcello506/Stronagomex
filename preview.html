@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOMEX | Obróbka CNC - Szydłowiec</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f8fafc;
+    color:#1e293b;
+    line-height:1.6;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(15,23,42,.95);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    padding:20px 0;
+}
+
+.logo{
+    margin-right:auto;
+}
+
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:2px;
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    height:50px;
+    width:auto;
+    cursor:pointer;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin-right:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+}
+
+nav a:hover{
+    color:#f97316;
+}
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(15,23,42,.8), rgba(15,23,42,.8)),
+    url('zdjecia/hifeed.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-content{
+    max-width:700px;
+}
+
+.hero h1{
+    font-size:64px;
+    margin-bottom:20px;
+    line-height:1.1;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:35px;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:#f97316;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    background:#ea580c;
+}
+
+section{
+    padding:100px 0;
+    scroll-margin-top:120px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
+    color:#0f172a;
+}
+
+.section-subtitle{
+    text-align:center;
+    max-width:700px;
+    margin:auto;
+    margin-bottom:60px;
+    color:#64748b;
+}
+
+.about{
+    background:white;
+}
+
+.about-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    border-radius:15px;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#0f172a;
+}
+
+.advantages{
+    background:#0f172a;
+    color:white;
+}
+
+.advantages-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.adv{
+    text-align:center;
+    padding:30px;
+}
+
+.adv h3{
+    margin:15px 0;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.contact{
+    background:white;
+}
+
+.contact-box{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+}
+
+.contact-item{
+    margin:20px 0;
+    font-size:20px;
+}
+
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+@media(max-width:900px){
+
+.hero h1{
+    font-size:42px;
+}
+
+.about-content{
+    grid-template-columns:1fr;
+}
+
+nav ul{
+    display:none;
+}
+}
+
+.lang-switcher img{
+    width:32px;
+    height:22px;
+}
+.lang-switcher{
+display:flex;
+gap:10px;
+}
+.flag-btn{
+background:none;
+border:none;
+font-size:24px;
+cursor:pointer;
+transition:.3s;
+}
+.flag-btn:hover{
+transform:scale(1.15);
+}
+
+.lang-btn{
+background:#f97316;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+
+.nav-right{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin:0;
+}
+
+.lang-switcher{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.flag-btn{
+    background:none;
+    border:none;
+    font-size:24px;
+    cursor:pointer;
+    color:white;
+}
+
+
+.lightbox{
+display:none;
+position:fixed;
+z-index:9999;
+left:0;top:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+}
+.lightbox img{max-width:90%;max-height:90%;border-radius:10px;}
+.lightbox .close{
+position:absolute;top:20px;right:35px;
+color:#fff;font-size:50px;cursor:pointer;
+}
+.gallery img{cursor:pointer;transition:.3s;}
+.gallery img:hover{transform:scale(1.03);}
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<nav>
+
+<a href="#" class="logo">
+<img src="zdjecia/logo.png" alt="Logo">
+</a>
+
+<div class="nav-right">
+<ul>
+<li><a href="#onas">O nas</a></li>
+<li><a href="#uslugi">Usługi</a></li>
+<li><a href="#realizacje">Realizacje</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+
+<div class="lang-switcher">
+    <img src="zdjecia/pl.png" class="flag" alt="Polski" onclick="setLang('pl')">
+    <img src="zdjecia/uk.png" class="flag" alt="English" onclick="setLang('en')">
+    <img src="zdjecia/de.png" class="flag" alt="Deutsch" onclick="setLang('de')">
+</div>
+
+</div>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<h1>Precyzyjna Obróbka CNC</h1>
+
+<p>
+Toczenie, frezowanie oraz szlifowanie elementów
+dla przemysłu i klientów indywidualnych.
+Produkcja jednostkowa oraz seryjna.
+</p>
+
+<a href="#kontakt" class="btn">Poproś o wycenę</a>
+
+</div>
+</div>
+</section>
+
+<section id="onas" class="about">
+<div class="container">
+
+<h2 class="section-title">O firmie</h2>
+
+<p class="section-subtitle">
+GOMEX z Szydłowca specjalizuje się w precyzyjnej
+obróbce metali zgodnie z dokumentacją techniczną klienta.
+</p>
+
+<div class="about-content">
+
+<img src="zdjecia/cmm.jfif" alt="CMM">
+
+<div>
+<h3 style="font-size:32px;margin-bottom:20px;">
+Doświadczenie i jakość
+</h3>
+
+<p>
+Wykonujemy detale o wysokiej dokładności wymiarowej,
+obsługując zarówno pojedyncze zlecenia jak i produkcję seryjną.
+Stawiamy na terminowość, jakość wykonania i indywidualne
+podejście do każdego klienta.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="uslugi">
+<div class="container">
+
+<h2 class="section-title">Nasze Usługi</h2>
+
+<div class="services-grid">
+
+<div class="card">
+<h3>Toczenie CNC</h3>
+<p>
+Produkcja wałów, tulei, pierścieni
+i innych elementów obrotowych.
+</p>
+</div>
+
+<div class="card">
+<h3>Frezowanie CNC</h3>
+<p>
+Obróbka skomplikowanych detali,
+otworów, rowków oraz powierzchni.
+</p>
+</div>
+
+<div class="card">
+<h3>Cięcie drutowe EDM</h3>
+<p>
+Precyzyjna obróbka elektroerozyjna
+skomplikowanych kształtów i detali.
+</p>
+</div>
+
+<div class="card">
+<h3>Szlifowanie</h3>
+<p>
+Precyzyjne wykańczanie powierzchni
+oraz zachowanie wymaganych tolerancji.
+</p>
+</div>
+
+<div class="card">
+<h3>Produkcja Seryjna</h3>
+<p>
+Realizacja większych zamówień
+dla przemysłu i firm produkcyjnych.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="advantages">
+
+<div class="container">
+
+<h2 class="section-title" style="color:white;">
+Dlaczego GOMEX?
+</h2>
+
+<div class="advantages-grid">
+
+<div class="adv">
+<h3>Dokładność</h3>
+<p>Precyzyjna obróbka zgodna z dokumentacją.</p>
+</div>
+
+
+<div class="adv">
+<h3>Elastyczność</h3>
+<p>Zlecenia jednostkowe i seryjne.</p>
+</div>
+
+<div class="adv">
+<h3>Doświadczenie</h3>
+<p>Profesjonalne podejście do każdego projektu.</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<section id="realizacje">
+
+<div class="container">
+
+<h2 class="section-title">Realizacje</h2>
+
+<div class="gallery">
+
+<img src="zdjecia/1.jpg">
+<img src="zdjecia/2.jpg">
+<img src="zdjecia/3.jpg">
+<img src="zdjecia/4.jpg">
+<img src="zdjecia/5.jpg">
+<img src="zdjecia/6.jpg">
+<img src="zdjecia/7.jpg">
+<img src="zdjecia/8.jpg">
+<img src="zdjecia/9.jpg">
+<img src="zdjecia/10.jpg">
+<img src="zdjecia/11.jpg">
+<img src="zdjecia/12.jpg">
+<img src="zdjecia/13.jpg">
+<img src="zdjecia/14.jpg">
+<img src="zdjecia/15.jpg">
+<img src="zdjecia/16.jpg">
+<img src="zdjecia/17.jpg">
+<img src="zdjecia/18.jpg">
+<img src="zdjecia/19.jpg">
+<img src="zdjecia/20.jpg">
+<img src="zdjecia/21.jpg">
+<img src="zdjecia/22.jpg">
+<img src="zdjecia/23.jpg">
+<img src="zdjecia/24.jpg">
+<img src="zdjecia/25.jpg">
+<img src="zdjecia/26.jpg">
+<img src="zdjecia/27.jpg">
+<img src="zdjecia/28.jpg">
+<img src="zdjecia/29.jpg">
+<img src="zdjecia/30.jpg">
+<img src="zdjecia/31.jpg">
+<img src="zdjecia/32.jpg">
+<img src="zdjecia/33.jpg">
+<img src="zdjecia/34.jpg">
+<img src="zdjecia/35.jpg">
+<img src="zdjecia/36.jpg">
+<img src="zdjecia/37.jpg">
+<img src="zdjecia/38.jpg">
+<img src="zdjecia/39.jpg">
+<img src="zdjecia/41.jpg">
+<img src="zdjecia/42.jpg">
+<img src="zdjecia/43.jpg">
+<img src="zdjecia/44.jpg">
+<img src="zdjecia/45.jpg">
+<img src="zdjecia/46.jpg">
+<img src="zdjecia/47.jpg">
+<img src="zdjecia/48.jpg">
+<img src="zdjecia/49.jpg">
+<img src="zdjecia/50.jpg">
+<img src="zdjecia/51.jpg">
+</div>
+</section>
+
+<section id="kontakt" class="contact">
+
+<div class="container">
+
+<h2 class="section-title">Kontakt GOMEX</h2>
+
+<div class="contact-box">
+
+
+<div class="contact-item">
+📍 Szydłowiec 26-500 Ul.Metalowa 1
+
+<div class="contact-item">
+📞 +48 503 149 440
+</div>
+
+<div class="contact-item">
+📞 +48 512 046 982
+</div>
+
+<div class="contact-item">   
+januszgomex@wp.pl 
+</a>   
+</div>
+<div class="contact-item">
+gomex@wp.pl 
+</a>
+</div>
+
+
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 GOMEX | Obróbka CNC | Szydłowiec
+</footer>
+
+<div id="lightbox" class="lightbox">
+<span class="close">&times;</span>
+<img id="lightbox-img" alt="Powiększone zdjęcie">
+</div>
+
+
+
+
+<script>
+const tr={
+pl:{
+nav:["O nas","Usługi","Realizacje","Kontakt"],
+heroTitle:"Precyzyjna Obróbka CNC",
+heroText:"Toczenie, frezowanie oraz szlifowanie elementów dla przemysłu i klientów indywidualnych. Produkcja jednostkowa oraz seryjna.",
+quote:"Poproś o wycenę",
+aboutTitle:"O firmie",
+aboutSub:"GOMEX z Szydłowca specjalizuje się w precyzyjnej obróbce metali zgodnie z dokumentacją techniczną klienta.",
+expTitle:"Doświadczenie i jakość",
+expText:"Wykonujemy detale o wysokiej dokładności wymiarowej, obsługując zarówno pojedyncze zlecenia jak i produkcję seryjną. Stawiamy na terminowość, jakość wykonania i indywidualne podejście do każdego klienta.",
+servicesTitle:"Nasze Usługi",
+cards:["Toczenie CNC","Produkcja wałów, tulei, pierścieni i innych elementów obrotowych.","Frezowanie CNC","Obróbka skomplikowanych detali, otworów, rowków oraz powierzchni.","Cięcie drutowe EDM","Precyzyjna obróbka elektroerozyjna skomplikowanych kształtów i detali.","Szlifowanie","Precyzyjne wykańczanie powierzchni oraz zachowanie wymaganych tolerancji.","Produkcja Seryjna","Realizacja większych zamówień dla przemysłu i firm produkcyjnych."],
+why:"Dlaczego GOMEX?",
+adv:["Dokładność","Precyzyjna obróbka zgodna z dokumentacją.","Elastyczność","Zlecenia jednostkowe i seryjne.","Doświadczenie","Profesjonalne podejście do każdego projektu."],
+projects:"Realizacje",
+contact:"Kontakt GOMEX"
+},
+en:{
+nav:["About Us","Services","Projects","Contact"],
+heroTitle:"Precision CNC Machining",
+heroText:"Turning, milling and grinding services for industry and individual customers. Prototype and serial production.",
+quote:"Request a Quote",
+aboutTitle:"About Company",
+aboutSub:"GOMEX specializes in precision metal machining according to customer technical documentation.",
+expTitle:"Experience and Quality",
+expText:"We manufacture high-precision parts for both single orders and serial production. We focus on punctuality, quality and an individual approach.",
+servicesTitle:"Our Services",
+cards:["CNC Turning","Production of shafts, bushings, rings and other rotational parts.","CNC Milling","Machining of complex parts, holes, grooves and surfaces.","Wire EDM Cutting","Precision electrical discharge machining of complex shapes and details.","Grinding","Precise surface finishing while maintaining required tolerances.","Serial Production","Execution of larger orders for industry and manufacturing companies."],
+why:"Why GOMEX?",
+adv:["Accuracy","Precision machining according to documentation.","Flexibility","Single and serial orders.","Experience","Professional approach to every project."],
+projects:"Projects",
+contact:"Contact GOMEX"
+},
+de:{
+nav:["Über uns","Leistungen","Referenzen","Kontakt"],
+heroTitle:"Präzise CNC-Bearbeitung",
+heroText:"Drehen, Fräsen und Schleifen für Industrie- und Privatkunden. Einzel- und Serienfertigung.",
+quote:"Angebot anfordern",
+aboutTitle:"Über das Unternehmen",
+aboutSub:"GOMEX ist auf präzise Metallbearbeitung nach Kundendokumentation spezialisiert.",
+expTitle:"Erfahrung und Qualität",
+expText:"Wir fertigen hochpräzise Teile für Einzel- und Serienaufträge. Termintreue, Qualität und individueller Service stehen im Mittelpunkt.",
+servicesTitle:"Unsere Leistungen",
+cards:["CNC-Drehen","Herstellung von Wellen, Buchsen, Ringen und anderen Rotationsteilen.","CNC-Fräsen","Bearbeitung komplexer Teile, Bohrungen, Nuten und Flächen.","Drahterodieren EDM","Präzise Funkenerosion komplexer Formen und Details.","Schleifen","Präzise Oberflächenbearbeitung bei Einhaltung enger Toleranzen.","Serienfertigung","Abwicklung größerer Aufträge für Industrieunternehmen."],
+why:"Warum GOMEX?",
+adv:["Präzision","Präzise Bearbeitung nach Dokumentation.","Flexibilität","Einzel- und Serienaufträge.","Erfahrung","Professioneller Ansatz für jedes Projekt."],
+projects:"Referenzen",
+contact:"Kontakt GOMEX"
+}
+};
+
+function setLang(l){
+localStorage.setItem('lang',l);
+let n=document.querySelectorAll('nav ul a');
+n[0].textContent=tr[l].nav[0]; n[1].textContent=tr[l].nav[1]; n[2].textContent=tr[l].nav[2]; n[3].textContent=tr[l].nav[3];
+document.querySelector('.hero h1').textContent=tr[l].heroTitle;
+document.querySelector('.hero p').textContent=tr[l].heroText;
+document.querySelector('.btn').textContent=tr[l].quote;
+
+document.querySelector('#onas .section-title').textContent=tr[l].aboutTitle;
+document.querySelector('#onas .section-subtitle').textContent=tr[l].aboutSub;
+document.querySelector('#onas h3').textContent=tr[l].expTitle;
+document.querySelector('#onas h3').nextElementSibling.textContent=tr[l].expText;
+
+document.querySelector('#uslugi .section-title').textContent=tr[l].servicesTitle;
+let cards=document.querySelectorAll('.card');
+for(let i=0;i<cards.length;i++){
+ cards[i].querySelector('h3').textContent=tr[l].cards[i*2];
+ cards[i].querySelector('p').textContent=tr[l].cards[i*2+1];
+}
+
+document.querySelector('.advantages .section-title').textContent=tr[l].why;
+let adv=document.querySelectorAll('.adv');
+for(let i=0;i<3;i++){
+ adv[i].querySelector('h3').textContent=tr[l].adv[i*2];
+ adv[i].querySelector('p').textContent=tr[l].adv[i*2+1];
+}
+
+document.querySelector('#realizacje .section-title').textContent=tr[l].projects;
+document.querySelector('#kontakt .section-title').textContent=tr[l].contact;
+}
+window.onload=()=>setLang(localStorage.getItem('lang')||'pl');
+
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+const closeBtn=document.querySelector('.lightbox .close');
+
+document.querySelectorAll('.gallery img').forEach(img=>{
+ img.addEventListener('click',()=>{
+   lightbox.style.display='flex';
+   lightboxImg.src=img.src;
+ });
+});
+
+closeBtn.addEventListener('click',()=>lightbox.style.display='none');
+lightbox.addEventListener('click',(e)=>{
+ if(e.target===lightbox) lightbox.style.display='none';
+});
+
+document.addEventListener('keydown',(e)=>{
+ if(e.key==='Escape') lightbox.style.display='none';
+});
+
+</script>
+</body>
+
+</html>
