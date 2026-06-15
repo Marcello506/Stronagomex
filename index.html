@@ -313,6 +313,25 @@ nav ul{
     color:white;
 }
 
+
+.lightbox{
+display:none;
+position:fixed;
+z-index:9999;
+left:0;top:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+}
+.lightbox img{max-width:90%;max-height:90%;border-radius:10px;}
+.lightbox .close{
+position:absolute;top:20px;right:35px;
+color:#fff;font-size:50px;cursor:pointer;
+}
+.gallery img{cursor:pointer;transition:.3s;}
+.gallery img:hover{transform:scale(1.03);}
+
 </style>
 </head>
 <body>
@@ -373,7 +392,7 @@ obróbce metali zgodnie z dokumentacją techniczną klienta.
 
 <div class="about-content">
 
-<img src="zdjecia/cmm.jfif"
+<img src="zdjecia/cmm.jfif" alt="CMM">
 
 <div>
 <h3 style="font-size:32px;margin-bottom:20px;">
@@ -482,12 +501,56 @@ Dlaczego GOMEX?
 
 <div class="gallery">
 
-<img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBjzE_dVDaLa7FlvOojwwEcRuCVjESgpapZZzP9S6qmNkpGinwpiNFQFr90-mrimcGK4jYCeWx7rYF2_VI-yrBqh4FsZxky8sB_Ss5bTe8MCFl27RgIsydXkKZQtZbU7RRUI9Zpe_iyNeBEfv6t2x7fYv2EJw06xTnLafhtI2P6HjH15e5wYZexhsDUonj3ZRd71ZFU8_yx3DmGN8jWQuToGPXFktJsfRLx3FulpE0=w1280">
-<img src="https://lh3.googleusercontent.com/sitesv/AA5AbUAZUnq1-rnmpqwKlO7BZzG-zilhUZ0lEunTVpQOClDCfSWX2vs1pPywBOtjKg3DhqiZHs8ee0IWTRRUqbnwQggFDt5dlD8savtsWQYj77L1SZdZYxeGXnxDMaU5RsetWp1yyGGxItjFGJzOkOGVLUdyG-z12CEBnkPHWg2fYbO6cwF40shKU2Is8DlwyvK3aeKd7K82hgKzllpPmACurMaEQQShdCIlJq_8ptUlydk=w1280">
-<img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCdzDko037FdXeBGNjWJxf6yI_muWRbNDjoolJN8xgwiSkYsJJMQxWLi9y1zzViAjBP-D3Ab0mrKQSKYIlbrokqnwGE_zjE39rurMwxL9IhxceRUHWrLcPN1vx3k72ZUH3e0zgGjGx9O2crH90iH69uLZWBEejwAyeyn9-ZVlgQRlRrvT-Upk2GbusZlTzPmf5WesdUebRpC39SDYmndx84UG-m4vmmJKdDshDBnz0=w1280">
-
-</div>
-
+<img src="zdjecia/1.jpg">
+<img src="zdjecia/2.jpg">
+<img src="zdjecia/3.jpg">
+<img src="zdjecia/4.jpg">
+<img src="zdjecia/5.jpg">
+<img src="zdjecia/6.jpg">
+<img src="zdjecia/7.jpg">
+<img src="zdjecia/8.jpg">
+<img src="zdjecia/9.jpg">
+<img src="zdjecia/10.jpg">
+<img src="zdjecia/11.jpg">
+<img src="zdjecia/12.jpg">
+<img src="zdjecia/13.jpg">
+<img src="zdjecia/14.jpg">
+<img src="zdjecia/15.jpg">
+<img src="zdjecia/16.jpg">
+<img src="zdjecia/17.jpg">
+<img src="zdjecia/18.jpg">
+<img src="zdjecia/19.jpg">
+<img src="zdjecia/20.jpg">
+<img src="zdjecia/21.jpg">
+<img src="zdjecia/22.jpg">
+<img src="zdjecia/23.jpg">
+<img src="zdjecia/24.jpg">
+<img src="zdjecia/25.jpg">
+<img src="zdjecia/26.jpg">
+<img src="zdjecia/27.jpg">
+<img src="zdjecia/28.jpg">
+<img src="zdjecia/29.jpg">
+<img src="zdjecia/30.jpg">
+<img src="zdjecia/31.jpg">
+<img src="zdjecia/32.jpg">
+<img src="zdjecia/33.jpg">
+<img src="zdjecia/34.jpg">
+<img src="zdjecia/35.jpg">
+<img src="zdjecia/36.jpg">
+<img src="zdjecia/37.jpg">
+<img src="zdjecia/38.jpg">
+<img src="zdjecia/39.jpg">
+<img src="zdjecia/41.jpg">
+<img src="zdjecia/42.jpg">
+<img src="zdjecia/43.jpg">
+<img src="zdjecia/44.jpg">
+<img src="zdjecia/45.jpg">
+<img src="zdjecia/46.jpg">
+<img src="zdjecia/47.jpg">
+<img src="zdjecia/48.jpg">
+<img src="zdjecia/49.jpg">
+<img src="zdjecia/50.jpg">
+<img src="zdjecia/51.jpg">
 </div>
 </section>
 
@@ -531,6 +594,12 @@ gomex@wp.pl
 <footer>
 © 2026 GOMEX | Obróbka CNC | Szydłowiec
 </footer>
+
+<div id="lightbox" class="lightbox">
+<span class="close">&times;</span>
+<img id="lightbox-img" alt="Powiększone zdjęcie">
+</div>
+
 
 
 
@@ -617,6 +686,27 @@ document.querySelector('#realizacje .section-title').textContent=tr[l].projects;
 document.querySelector('#kontakt .section-title').textContent=tr[l].contact;
 }
 window.onload=()=>setLang(localStorage.getItem('lang')||'pl');
+
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+const closeBtn=document.querySelector('.lightbox .close');
+
+document.querySelectorAll('.gallery img').forEach(img=>{
+ img.addEventListener('click',()=>{
+   lightbox.style.display='flex';
+   lightboxImg.src=img.src;
+ });
+});
+
+closeBtn.addEventListener('click',()=>lightbox.style.display='none');
+lightbox.addEventListener('click',(e)=>{
+ if(e.target===lightbox) lightbox.style.display='none';
+});
+
+document.addEventListener('keydown',(e)=>{
+ if(e.key==='Escape') lightbox.style.display='none';
+});
+
 </script>
 </body>
 
